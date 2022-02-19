@@ -54,9 +54,6 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
 
 
 
-        textPosition = (x, y) # (x, y) from top left
-        fontColour = (R,G,B) #rgb colour values
-        I1.text(textPosition, text, font=myFont, fill =fontColour)
     except OSError:
         # Call draw Method to add 2D graphics in an image
         I1 = ImageDraw.Draw(img)
@@ -112,7 +109,7 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
 
 #draw 3 simple magentas lines from the text
 drawWords(Lines[0], 20, 40, 255, 0, 255, 65)
-drawWords(Lines[1], 20, 300, 255, 0, 255, 65)
+#drawWords(Lines[1], 20, 300, 255, 0, 255, 65)
 #drawWords(Lines[2], 20, 280, 255, 0, 255, 65)
 
 
