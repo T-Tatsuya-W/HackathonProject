@@ -1,25 +1,22 @@
-from PIL import ImageFont, ImageDraw, Image
-
-image = Image.open('car.png')
-draw = ImageDraw.Draw(image)
-txt = "Hello World"
-fontsize = 1  # starting font size
-
-# portion of image width you want text width to be
-img_fraction = 0.50
-
-font = ImageFont.truetype("arial.ttf", fontsize)
-while font.getsize(txt)[0] < img_fraction*image.size[0]:
-    # iterate until the text size is just larger than the criteria
-    fontsize += 1
-    font = ImageFont.truetype("arial.ttf", fontsize)
-
-# optionally de-increment to be sure it is less than criteria
-fontsize -= 1
-font = ImageFont.truetype("arial.ttf", fontsize)
-
-print('final font size',fontsize)
-
-draw.text((10, 25), txt, font=font) # put the text on the image
-
-image.save('hsvwheel_txt.png') # save it
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
+ 
+# Open an Image
+img = Image.open('car.png')
+ 
+# Call draw Method to add 2D graphics in an image
+I1 = ImageDraw.Draw(img)
+ 
+# Custom font style and font size
+myFont = ImageFont.load_default()
+#myFont = ImageFont.truetype('FreeMono.ttf', 65)
+ 
+# Add Text to an image
+I1.text((10, 10), "Nice Car", font=myFont, fill =(255, 0, 0))
+ 
+# Display edited image
+img.show()
+ 
+# Save the edited image
+img.save("car2.png")
