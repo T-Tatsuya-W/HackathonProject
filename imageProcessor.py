@@ -19,35 +19,40 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
 
         textsize = myFont.getsize(text)
         distanceRight = x+textsize[0]
-        if (distanceRight > img.width):
-            newText = text.split()
-            printString = ""
-            #print(newText)
-            sum = x
 
-            for a in range(len(newText)):
-                printString += newText[a]
-                printString += " "
-                wordsize = myFont.getsize(printString)[0] + x
-                #print(wordsize)
-                #sum = sum + myFont.getsize(a)[0]
-                
-                if a!=len(newText)-1:
-                    if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
-                        textPosition = (x, y) # (x, y) from top left
-                        fontColour = (R,G,B) #rgb colour values
-                        I1.text(textPosition, printString, font=myFont, fill =fontColour)
+        
+        print(size)
 
-                        y=y+size
-                        printString = ""
+        newText = text.split()
+        printString = ""
+        #print(newText)
+        sum = x
 
-                else: 
-                    #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
-                        textPosition = (x, y) # (x, y) from top left
-                        fontColour = (R,G,B) #rgb colour values
-                        I1.text(textPosition, printString, font=myFont, fill =fontColour)
 
-                        y=y+size
+        for a in range(len(newText)):
+            printString += newText[a]
+            printString += " "
+            wordsize = myFont.getsize(printString)[0] + x
+            #print(wordsize)
+            #sum = sum + myFont.getsize(a)[0]
+
+            
+            if a!=len(newText)-1:
+                if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                    textPosition = (x, y) # (x, y) from top left
+                    fontColour = (R,G,B) #rgb colour values
+                    I1.text(textPosition, printString, font=myFont, fill =fontColour)
+
+                    y=y+size
+                    printString = ""
+
+            else: 
+                #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                    textPosition = (x, y) # (x, y) from top left
+                    fontColour = (R,G,B) #rgb colour values
+                    I1.text(textPosition, printString, font=myFont, fill =fontColour)
+
+                    y=y+size
 
         return y
 
@@ -66,35 +71,40 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
         
         textsize = myFont.getsize(text)
         distanceRight = x+textsize[0]
-        if (distanceRight > img.width):
-            newText = text.split()
-            printString = ""
-            #print(newText)
-            sum = x
 
-            for a in range(len(newText)):
-                printString += newText[a]
-                printString += " "
-                wordsize = myFont.getsize(printString)[0] + x
-                #print(wordsize)
-                #sum = sum + myFont.getsize(a)[0]
-                
-                if a!=len(newText)-1:
-                    if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
-                        textPosition = (x, y) # (x, y) from top left
-                        fontColour = (R,G,B) #rgb colour values
-                        I1.text(textPosition, printString, font=myFont, fill =fontColour)
+        
+        print(size)
 
-                        y=y+size
-                        printString = ""
+        newText = text.split()
+        printString = ""
+        #print(newText)
+        sum = x
 
-                else: 
-                    #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
-                        textPosition = (x, y) # (x, y) from top left
-                        fontColour = (R,G,B) #rgb colour values
-                        I1.text(textPosition, printString, font=myFont, fill =fontColour)
 
-                        y=y+size
+        for a in range(len(newText)):
+            printString += newText[a]
+            printString += " "
+            wordsize = myFont.getsize(printString)[0] + x
+            #print(wordsize)
+            #sum = sum + myFont.getsize(a)[0]
+
+            
+            if a!=len(newText)-1:
+                if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                    textPosition = (x, y) # (x, y) from top left
+                    fontColour = (R,G,B) #rgb colour values
+                    I1.text(textPosition, printString, font=myFont, fill =fontColour)
+
+                    y=y+size
+                    printString = ""
+
+            else: 
+                #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                    textPosition = (x, y) # (x, y) from top left
+                    fontColour = (R,G,B) #rgb colour values
+                    I1.text(textPosition, printString, font=myFont, fill =fontColour)
+
+                    y=y+size
 
         return y
 
@@ -107,7 +117,7 @@ nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 53)
 nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 52)
 nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 51)
 
-#drawWords(Lines[2], 20, 280, 255, 0, 255, 65)
+#drawWords(Lines[2  ], 20, 280, 255, 0, 255, 65)
 
 
 img.show()  #temporarily shows the created image
