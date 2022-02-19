@@ -8,15 +8,15 @@ fontsize = 1  # starting font size
 # portion of image width you want text width to be
 img_fraction = 0.50
 
-font = ImageFont.truetype("arial.ttf", fontsize)
+font = ImageFont.truetype("Arial.ttf", fontsize)
 while font.getsize(txt)[0] < img_fraction*image.size[0]:
     # iterate until the text size is just larger than the criteria
     fontsize += 1
-    font = ImageFont.truetype("arial.ttf", fontsize)
+    font = ImageFont.truetype("Arial.ttf", fontsize)
 
 # optionally de-increment to be sure it is less than criteria
 fontsize -= 1
-font = ImageFont.truetype("arial.ttf", fontsize)
+font = ImageFont.truetype("Arial.ttf", fontsize)
 
 print('final font size',fontsize)
 

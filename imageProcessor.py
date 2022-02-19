@@ -1,22 +1,30 @@
-from PIL import Image
-from PIL import ImageDraw
-from PIL import ImageFont
+from PIL import Image,ImageDraw,ImageFont
  
-# Open an Image
-img = Image.open('car.png')
+# Open an Image in src
+src1 = "sources/car.png"
+img = Image.open(src1)
+src2 = "sources/text.txt"
+text = open(src2, "r")
+
+
+
  
 # Call draw Method to add 2D graphics in an image
 I1 = ImageDraw.Draw(img)
  
 # Custom font style and font size
-myFont = ImageFont.load_default()
-#myFont = ImageFont.truetype('FreeMono.ttf', 65)
+#myFont = ImageFont.load_default()
+fontSize = 65
+fontType = "arial"              #"arial" for Windows, "Arial" for Mac
+myFont = ImageFont.truetype(fontType, fontSize)
  
-# Add Text to an image
-I1.text((10, 10), "Nice Car", font=myFont, fill =(255, 0, 0))
+textPosition = (20, 40) # (x, y) from top left
+textContents = "Nice Car"
+fontColour = (225,0,225) #rgb colour values
+I1.text(textPosition, textContents, font=myFont, fill =fontColour)
  
-# Display edited image
-img.show()
+
+img.show()  #temporarily shows the created image
  
-# Save the edited image
-img.save("car2.png")
+img.save("car2.png")    # Save the image
+

@@ -1,3 +1,0 @@
-Here is a test for the GIT setup
-test - andrew
-test -tony
