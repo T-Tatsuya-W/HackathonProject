@@ -28,7 +28,7 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
             for a in range(len(newText)):
                 printString += newText[a]
                 printString += " "
-                wordsize = myFont.getsize(printString)[0] + 10
+                wordsize = myFont.getsize(printString)[0] + x
                 #print(wordsize)
                 #sum = sum + myFont.getsize(a)[0]
                 
@@ -40,6 +40,7 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
 
                         y=y+size
                         printString = ""
+
                 else: 
                     #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
                         textPosition = (x, y) # (x, y) from top left
@@ -47,8 +48,8 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
                         I1.text(textPosition, printString, font=myFont, fill =fontColour)
 
                         y=y+size
-                        printString = ""
-                        I1.text(textPosition, newText[len(newText)-1], font=myFont, fill =fontColour)
+
+        return y
 
             
 
@@ -57,7 +58,7 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
     except OSError:
         # Call draw Method to add 2D graphics in an image
         I1 = ImageDraw.Draw(img)
-        # Custom font style and font size
+        # Custom font style and font size   
         #myFont = ImageFont.load_default()
         fontType = "Arial"              # "arial" for Windows, "Arial" for Mac
         myFont = ImageFont.truetype(fontType, size)
@@ -74,7 +75,7 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
             for a in range(len(newText)):
                 printString += newText[a]
                 printString += " "
-                wordsize = myFont.getsize(printString)[0] + 10
+                wordsize = myFont.getsize(printString)[0] + x
                 #print(wordsize)
                 #sum = sum + myFont.getsize(a)[0]
                 
@@ -86,6 +87,7 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
 
                         y=y+size
                         printString = ""
+
                 else: 
                     #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
                         textPosition = (x, y) # (x, y) from top left
@@ -93,23 +95,18 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
                         I1.text(textPosition, printString, font=myFont, fill =fontColour)
 
                         y=y+size
-                        printString = ""
-                        I1.text(textPosition, newText[len(newText)-1], font=myFont, fill =fontColour)
 
+        return y
 
-
-        
-        
-        
-        
-        
-        
-
-        
 
 #draw 3 simple magentas lines from the text
-drawWords(Lines[0], 20, 40, 255, 0, 255, 65)
-#drawWords(Lines[1], 20, 300, 255, 0, 255, 65)
+nexty = drawWords(Lines[0], 20, 40, 255, 0, 255, 65)
+nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 55)
+nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 54)
+nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 53)
+nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 52)
+nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 51)
+
 #drawWords(Lines[2], 20, 280, 255, 0, 255, 65)
 
 
