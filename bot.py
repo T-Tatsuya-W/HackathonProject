@@ -1,4 +1,5 @@
 # bot.py
+from asyncio.windows_events import NULL
 import os
 
 import discord
@@ -18,13 +19,19 @@ async def on_message(message):
     if message.content.startswith('$artin'):
         await message.channel.send('Fuck off!')
     if message.content.startswith('$quote'):
-        data = []
+        messagecontent = []
+        messageauthor = []
+
         async for msg in message.channel.history(limit=100):
             if msg.author != client.user:
-                data = data.append(msg.content)
-            if len(data) == 100:
-                break
-        print(data)                      
+                #print("the current message is------"+msg.content)
+                if type(msg.content) == list:
+                    #print("has reached the end of the messages")
+                    break
+                else:
+                    messagecontent.append(msg.content)
+                    messageauthor.append(msg.author)
+        print(messagecontent)                      
 
 @client.event
 async def on_ready():
