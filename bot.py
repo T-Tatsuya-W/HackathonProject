@@ -41,7 +41,8 @@ async def on_message(message):
                     messageauthor.append(msg.author.name)
 
         x = rnd.randrange(len(messagecontent)-1)
-        print(messagecontent[x] + "\n" + messageauthor[x])
+        value = (messagecontent[x] + "\n" + messageauthor[x])
+        print (value)
                        
 
 #region OnReadyEvent
