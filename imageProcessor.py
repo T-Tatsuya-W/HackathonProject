@@ -17,24 +17,41 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
         fontType = "arial"              #"arial" for Windows, "Arial" for Mac
         myFont = ImageFont.truetype(fontType, size)
 
-        size = myFont.getsize(text)
-
-        distanceRight = x+size[0]
-
+        textsize = myFont.getsize(text)
+        distanceRight = x+textsize[0]
         if (distanceRight > img.width):
             newText = text.split()
             printString = ""
-            print(newText)
+            #print(newText)
             sum = x
-            for a in newText:
-                printString += a
-                wordsize = myFont.getsize(printString)
 
+            for a in range(len(newText)):
+                printString += newText[a]
+                printString += " "
+                wordsize = myFont.getsize(printString)[0] + 10
+                #print(wordsize)
+                #sum = sum + myFont.getsize(a)[0]
+                
+                if a!=len(newText)-1:
+                    if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                        textPosition = (x, y) # (x, y) from top left
+                        fontColour = (R,G,B) #rgb colour values
+                        I1.text(textPosition, printString, font=myFont, fill =fontColour)
 
+                        y=y+size
+                        printString = ""
+                else: 
+                    #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                        textPosition = (x, y) # (x, y) from top left
+                        fontColour = (R,G,B) #rgb colour values
+                        I1.text(textPosition, printString, font=myFont, fill =fontColour)
 
+                        y=y+size
+                        printString = ""
+                        I1.text(textPosition, newText[len(newText)-1], font=myFont, fill =fontColour)
 
+            
 
-        print(size)
 
 
         textPosition = (x, y) # (x, y) from top left
@@ -45,18 +62,58 @@ def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with bo
         I1 = ImageDraw.Draw(img)
         # Custom font style and font size
         #myFont = ImageFont.load_default()
-        fontType = "Arial"              #"arial" for Windows, "Arial" for Mac
+        fontType = "Arial"              # "arial" for Windows, "Arial" for Mac
         myFont = ImageFont.truetype(fontType, size)
-        textPosition = (x, y) # (x, y) from top left
-        fontColour = (R,G,B) #rgb colour values
-        I1.text(textPosition, text, font=myFont, fill =fontColour)
+
+        
+        textsize = myFont.getsize(text)
+        distanceRight = x+textsize[0]
+        if (distanceRight > img.width):
+            newText = text.split()
+            printString = ""
+            #print(newText)
+            sum = x
+
+            for a in range(len(newText)):
+                printString += newText[a]
+                printString += " "
+                wordsize = myFont.getsize(printString)[0] + 10
+                #print(wordsize)
+                #sum = sum + myFont.getsize(a)[0]
+                
+                if a!=len(newText)-1:
+                    if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                        textPosition = (x, y) # (x, y) from top left
+                        fontColour = (R,G,B) #rgb colour values
+                        I1.text(textPosition, printString, font=myFont, fill =fontColour)
+
+                        y=y+size
+                        printString = ""
+                else: 
+                    #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                        textPosition = (x, y) # (x, y) from top left
+                        fontColour = (R,G,B) #rgb colour values
+                        I1.text(textPosition, printString, font=myFont, fill =fontColour)
+
+                        y=y+size
+                        printString = ""
+                        I1.text(textPosition, newText[len(newText)-1], font=myFont, fill =fontColour)
+
+
+
+        
+        
+        
+        
+        
+        
 
         
 
 #draw 3 simple magentas lines from the text
 drawWords(Lines[0], 20, 40, 255, 0, 255, 65)
-drawWords(Lines[1], 20, 100, 255, 0, 255, 65)
-drawWords(Lines[2], 20, 160, 255, 0, 255, 65)
+drawWords(Lines[1], 20, 300, 255, 0, 255, 65)
+#drawWords(Lines[2], 20, 280, 255, 0, 255, 65)
 
 
 img.show()  #temporarily shows the created image
