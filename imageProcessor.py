@@ -6,107 +6,73 @@ src2 = "sources/text.txt"
 text = open(src2, "r")
 Lines = text.readlines()    #each line is read into an array as a new objec
 
-print(img.width, img.height)
 
-def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with both windows and mac
-    try:
+def writeWordsWithNewLines(font):
+        fontType = font         #"arial" for Windows, "Arial" for Mac
         # Call draw Method to add 2D graphics in an image
         I1 = ImageDraw.Draw(img)
         # Custom font style and font size
         #myFont = ImageFont.load_default()
-        fontType = "arial"              #"arial" for Windows, "Arial" for Mac
-        myFont = ImageFont.truetype(fontType, size)
+        
+        myFont = ImageFont.truetype(fontType, drawWords.size)
 
-        textsize = myFont.getsize(text)
-        distanceRight = x+textsize[0]
+        textsize = myFont.getsize(drawWords.text)
+        distanceRight = drawWords.x+textsize[0]
 
         
-        print(size)
+        print(drawWords.size)
 
-        newText = text.split()
+        newText = drawWords.text.split()
         printString = ""
         #print(newText)
-        sum = x
+        sum = drawWords.x
 
 
         for a in range(len(newText)):
             printString += newText[a]
             printString += " "
-            wordsize = myFont.getsize(printString)[0] + x
+            wordsize = myFont.getsize(printString)[0] + drawWords.x
             #print(wordsize)
             #sum = sum + myFont.getsize(a)[0]
 
             
             if a!=len(newText)-1:
                 if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
-                    textPosition = (x, y) # (x, y) from top left
-                    fontColour = (R,G,B) #rgb colour values
+                    textPosition = (drawWords.x, drawWords.y) # (x, y) from top left
+                    fontColour = (drawWords.R,drawWords.G,drawWords.B) #rgb colour values
                     I1.text(textPosition, printString, font=myFont, fill =fontColour)
 
-                    y=y+size
+                    drawWords.y=drawWords.y+drawWords.size
                     printString = ""
 
             else: 
                 #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
-                    textPosition = (x, y) # (x, y) from top left
-                    fontColour = (R,G,B) #rgb colour values
+                    textPosition = (drawWords.x, drawWords.y) # (x, y) from top left
+                    fontColour = (drawWords.R,drawWords.G,drawWords.B) #rgb colour values
                     I1.text(textPosition, printString, font=myFont, fill =fontColour)
 
-                    y=y+size
-
-        return y
-
-            
+                    drawWords.y=drawWords.y+drawWords.size
 
 
+
+def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with both windows and mac
+    drawWords.text = text
+    drawWords.x = x
+    drawWords.y = y
+    drawWords.R = R
+    drawWords.G = G
+    drawWords.B = B
+    drawWords.size = size
+
+
+    try:
+        writeWordsWithNewLines("arial")
 
     except OSError:
-        # Call draw Method to add 2D graphics in an image
-        I1 = ImageDraw.Draw(img)
-        # Custom font style and font size   
-        #myFont = ImageFont.load_default()
-        fontType = "Arial"              # "arial" for Windows, "Arial" for Mac
-        myFont = ImageFont.truetype(fontType, size)
+        writeWordsWithNewLines("Arial")
 
-        
-        textsize = myFont.getsize(text)
-        distanceRight = x+textsize[0]
-
-        
-        print(size)
-
-        newText = text.split()
-        printString = ""
-        #print(newText)
-        sum = x
-
-
-        for a in range(len(newText)):
-            printString += newText[a]
-            printString += " "
-            wordsize = myFont.getsize(printString)[0] + x
-            #print(wordsize)
-            #sum = sum + myFont.getsize(a)[0]
-
-            
-            if a!=len(newText)-1:
-                if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
-                    textPosition = (x, y) # (x, y) from top left
-                    fontColour = (R,G,B) #rgb colour values
-                    I1.text(textPosition, printString, font=myFont, fill =fontColour)
-
-                    y=y+size
-                    printString = ""
-
-            else: 
-                #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
-                    textPosition = (x, y) # (x, y) from top left
-                    fontColour = (R,G,B) #rgb colour values
-                    I1.text(textPosition, printString, font=myFont, fill =fontColour)
-
-                    y=y+size
-
-        return y
+    return drawWords.y
+    
 
 
 #draw 3 simple magentas lines from the text
@@ -122,4 +88,4 @@ nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 51)
 
 img.show()  #temporarily shows the created image
 
-img.save("car2.png")    # Save the image
+img.save(".gitignore/car2.png")    # Save the image
