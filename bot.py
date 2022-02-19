@@ -43,6 +43,7 @@ async def on_message(message):
         x = rnd.randrange(len(messagecontent)-1)
         value = (messagecontent[x] + "\n" + messageauthor[x])
         print (value)
+        await message.channel.send(value)
                        
 
 #region OnReadyEvent
