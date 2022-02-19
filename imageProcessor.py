@@ -1,13 +1,12 @@
 from PIL import Image,ImageDraw,ImageFont
  
-# Open an Image in src
 src1 = "sources/car.png"
 img = Image.open(src1)
 src2 = "sources/text.txt"
 text = open(src2, "r")
 Lines = text.readlines()    #each line is read into an array as a new objec
 
-def drawWords(text, x, y, R, G, B, size):
+def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with both windows and mac
     try:
         # Call draw Method to add 2D graphics in an image
         I1 = ImageDraw.Draw(img)
@@ -33,9 +32,9 @@ def drawWords(text, x, y, R, G, B, size):
 
 drawWords(Lines[0], 20, 40, 255, 0, 255, 65)
 
-drawWords(Lines[1], 20, 80, 255, 0, 255, 65)
+drawWords(Lines[1], 20, 100, 255, 0, 255, 65)
 
-drawWords(Lines[2], 20, 140, 255, 0, 255, 65)
+drawWords(Lines[2], 20, 160, 255, 0, 255, 65)
 
 img.show()  #temporarily shows the created image
 
