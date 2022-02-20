@@ -1,5 +1,5 @@
 from PIL import Image,ImageDraw,ImageFont
- 
+from bot import img
 
 """
 src1 = "sources/car.png"
