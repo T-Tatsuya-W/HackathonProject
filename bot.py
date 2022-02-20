@@ -8,7 +8,7 @@ import random as rnd
 #image processor for image handling
 from PIL import Image,ImageDraw,ImageFont
 import imageProcessor as IP
-import constructor_preqoute as CS
+import Construcor/constructor_preqoute as CS
 
 #endregion
 
