@@ -55,7 +55,7 @@ async def on_message(message):
 
         image1.saveImage()
 
-
+        await message.channel.send(file=discord.File('car2.png'))
 
         #---------------------------
         await message.channel.send(value)
