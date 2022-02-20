@@ -1,4 +1,4 @@
-# HackathonProject
+# "Quote" bot
 "
 ## Inspiration
 Bringing people together by making them laugh.
