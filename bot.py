@@ -5,6 +5,7 @@ import sys
 import discord
 from dotenv import load_dotenv
 import random as rnd
+import PIL
 
 #image processor for image handling
 from PIL import Image,ImageDraw,ImageFont
@@ -71,15 +72,33 @@ async def on_message(message):
         img.save("tempImage.png")
 
 
+        img = Image.open("tempImage.png")
+        (width, height) = img.size
+        total = 0
+        for i in range(height):
+            for j in range(width):
+                colours = img.getpixel((j,i))
+                total += colours[0]
+                total += colours[1]
+                total += colours[2]
+        avg = total/(3*width*height)
+        
+        if avg < (255/2):
+            rgb = 255
+        else:
+            rgb = 0
 
-        image1 = IP.ImageHandler(0,0,0,50,"tempImage.png")
+
+
+
+        image1 = IP.ImageHandler(rgb,rgb,rgb,50,"tempImage.png")
         #image1 = IP.ImageHandler(0,0,0,50,"sources/car.png")
 
         image1.setTextBoxDimensions()
 
         image1.fontPicker()
 
-        image1.drawWords(quote1, 0)
+        image1.drawWords("\""+quote1+"\"", 0)
 
         #image1.drawWords(quote2, 1)
 
@@ -114,7 +133,7 @@ async def on_reaction_add(reaction, user):
 
             image1.fontPicker()
 
-            image1.drawWords(reaction.message.content, 0)
+            image1.drawWords("\""+reaction.message.content+"\"", 0)
 
             image1.drawWords(CS.generator(), 2)
 
