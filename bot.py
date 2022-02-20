@@ -126,6 +126,24 @@ async def on_reaction_add(reaction, user):
             #img.show()
             img.save("tempImage.png")
 
+                
+            img = Image.open("tempImage.png")
+            (width, height) = img.size
+            total = 0
+            for i in range(height):
+                for j in range(width):
+                    colours = img.getpixel((j,i))
+                    total += colours[0]
+                    total += colours[1]
+                    total += colours[2]
+            avg = total/(3*width*height)
+            
+            if avg < (255/2):
+                rgb = 255
+            else:
+                rgb = 0
+
+
             image1 = IP.ImageHandler(0,0,0,50,"tempImage.png")
             #image1 = IP.ImageHandler(0,0,0,50,"sources/car.png")
 

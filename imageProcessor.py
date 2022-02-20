@@ -91,4 +91,6 @@ class ImageHandler():
         #fontType = "fonts/ArianaVioleta.ttf"
         self.fontType = random.choice(os.listdir("fonts/"))
 
+        print(self.fontType)
+
 
