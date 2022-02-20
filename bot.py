@@ -57,7 +57,18 @@ async def on_message(message):
 
         #---------------------added image code
         #------------------------R,G,B,fontSize,img source
-        image1 = IP.ImageHandler(0,0,0,50,"sources/car.png")
+
+        import requests
+        from io import BytesIO
+
+        url = "https://source.unsplash.com/random"
+        response = requests.get(url)
+        img = Image.open(BytesIO(response.content))
+        #img.show()
+        img.save("tempImage.png")
+
+        image1 = IP.ImageHandler(0,0,0,50,"tempImage.png")
+        #image1 = IP.ImageHandler(0,0,0,50,"sources/car.png")
 
         image1.setTextBoxDimensions()
 
