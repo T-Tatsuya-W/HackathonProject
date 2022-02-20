@@ -9,7 +9,7 @@ import random as rnd
 from PIL import Image,ImageDraw,ImageFont
 import imageProcessor as IP
 from Constructor import constructor_preqoute as CS
-
+CS.generator()
 #endregion
 
 load_dotenv()
