@@ -1,6 +1,8 @@
 # bot.py
 #region Imports
-from asyncio.windows_events import NULL
+#from asyncio.windows_events import NULL
+
+from email.mime import image
 import os
 import discord
 from dotenv import load_dotenv
@@ -12,10 +14,7 @@ import random as rnd
 from PIL import Image,ImageDraw,ImageFont
 import imageProcessor as IP
 
-src1 = "sources/car.png"
-img = Image.open(src1)
-
-
+img = IP.getImage("sources/car.png")
 
 #endregion
 
@@ -23,7 +22,6 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 client = discord.Client()
-
 
 @client.event
 async def on_message(message):
@@ -58,8 +56,9 @@ async def on_message(message):
         #---------------------added image code
 
         nexty = IP.drawWords(messagecontent[x], 20, 40, 255, 0, 255, 65)
-        img.show()  #temporarily shows the created imag
-        img.save(".gitignore/car2.png")    # Save the image
+
+
+        IP.save()
 
 
         #---------------------------

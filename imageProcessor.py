@@ -1,12 +1,17 @@
 from PIL import Image,ImageDraw,ImageFont
  
+
+"""
 src1 = "sources/car.png"
 img = Image.open(src1)
 src2 = "sources/text.txt"
 text = open(src2, "r")
 Lines = text.readlines()   
-
+"""
 #----------------------------------------------------------------------------------------------
+
+def getImage(src):
+    return Image.open(src)
 
 
 def writeWordsWithNewLines(font):
@@ -81,8 +86,14 @@ def drawWords(text, x, y, R, G, B, size):
 
     #returns bottom y value for next draw functions to use as the top value
     return drawWords.y
-    
 
+
+
+def saveImage():
+    img.show()
+    img.save(".gitignore/car2.png")
+    
+"""
 
 #draws basic lines to test the auto newline, even this should be automated
 nexty = drawWords(Lines[0], 20, 40, 255, 0, 255, 65)
@@ -98,4 +109,4 @@ img.show()  #temporarily shows the created image
 
 
 #saves img to the directory indicated
-img.save(".gitignore/car2.png")    # Save the image
+img.save(".gitignore/car2.png")    # Save the image"""
