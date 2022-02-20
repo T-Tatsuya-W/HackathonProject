@@ -8,6 +8,7 @@ import random as rnd
 #image processor for image handling
 from PIL import Image,ImageDraw,ImageFont
 import imageProcessor as IP
+import constructor_preqoute as CS
 
 #endregion
 
@@ -53,7 +54,7 @@ async def on_message(message):
 
 
         quote2 = "Author name"
-        quote3 = "Author description goes here"
+        quote3 = CS.generator()
 
         #---------------------added image code
         #------------------------R,G,B,fontSize,img source
