@@ -1,5 +1,5 @@
 from PIL import Image,ImageDraw,ImageFont
-import os, random
+import os, random, math
 
 class ImageHandler():
     def __init__(self, R, G, B, size, src) -> None:
@@ -9,6 +9,7 @@ class ImageHandler():
         self.size = size
         self.text = ""
         self.myFont = ""
+        self.fontType = ""
 
         self.textBoxes = [[0,0,0,0],[0,0,0,0],[0,0,0,0]]
         self.image = Image.open(src)
@@ -20,12 +21,19 @@ class ImageHandler():
         self.text = text
         #ensures that the text is contained within the constraints of the image width
 
-        
         I1 = ImageDraw.Draw(self.image)
 
         
+        self.myFont = ImageFont.truetype("fonts/"+self.fontType, self.size)
 
         textsize = self.myFont.getsize(self.text)
+
+        availableArea = (self.textBoxes[textBoxNo][2]-self.textBoxes[textBoxNo][0])*(self.textBoxes[textBoxNo][3]-self.textBoxes[textBoxNo][1])
+        currentArea = textsize[0]*textsize[1]
+        newFontSize = int(self.size*(math.floor(availableArea)/math.ceil(currentArea)))
+
+        self.size = newFontSize
+
         distanceRight = self.textBoxes[textBoxNo][0]+textsize[0]
 
         newText = self.text.split()
@@ -70,7 +78,30 @@ class ImageHandler():
 
     def fontPicker(self):
         #fontType = "fonts/ArianaVioleta.ttf"
-        fontType = random.choice(os.listdir("fonts/"))
-        self.myFont = ImageFont.truetype("fonts/"+fontType, self.size)
+        self.fontType = random.choice(os.listdir("fonts/"))
+
+"""
+    def autoFontSize(self, text, textBoxNo): #will have the string, and textbox type passed into it
+        #start at font size a
+        
+        #iterate
+            #set template to image
+            #try writing the string with current font size
+            #if end y < y2, increment font size and repeat iterate
+
+            #once y>y2, break from loop and de increment font size by 1 unit
+            #write with this font size onto image
+        
+        self.size = 5
+        fitFlag = False
+
+        while not fitFlag:
+            templateImage = self.image.copy()
+            #write string to template
+            templateImage.d
+
+"""
+
+
 
 
