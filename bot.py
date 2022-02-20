@@ -70,6 +70,8 @@ async def on_message(message):
         #img.show()
         img.save("tempImage.png")
 
+
+
         image1 = IP.ImageHandler(0,0,0,50,"tempImage.png")
         #image1 = IP.ImageHandler(0,0,0,50,"sources/car.png")
 
@@ -79,7 +81,7 @@ async def on_message(message):
 
         image1.drawWords(quote1, 0)
 
-        image1.drawWords(quote2, 1)
+        #image1.drawWords(quote2, 1)
 
         image1.drawWords(quote3, 2)
 
@@ -90,6 +92,38 @@ async def on_message(message):
         await message.channel.send("Here is a comment to accompany the quote")
 
 
+@client.event
+async def on_reaction_add(reaction, user):
+    if user != client.user:
+        emoji = reaction.emoji
+        if str(emoji) == "💬":
+            print("aaa")
+            import requests
+            from io import BytesIO
+
+            url = "https://source.unsplash.com/random"
+            response = requests.get(url)
+            img = Image.open(BytesIO(response.content))
+            #img.show()
+            img.save("tempImage.png")
+
+            image1 = IP.ImageHandler(0,0,0,50,"tempImage.png")
+            #image1 = IP.ImageHandler(0,0,0,50,"sources/car.png")
+
+            image1.setTextBoxDimensions()
+
+            image1.fontPicker()
+
+            image1.drawWords(reaction.message.content, 0)
+
+            image1.drawWords(reaction.message.author.name, 1)
+
+            image1.saveImage()
+
+
+            await reaction.message.channel.send(file=discord.File('output.png'))
+            #--------------------------- Message after the image should be changed to something beter
+            await reaction.message.channel.send("Here is a comment to accompany the quote")
 
 #region OnReadyEvent
 @client.event

@@ -22,7 +22,7 @@ class ImageHandler():
         #ensures that the text is contained within the constraints of the image width
 
         I1 = ImageDraw.Draw(self.image)
-
+        self.size = 50
         
         self.myFont = ImageFont.truetype("fonts/"+self.fontType, self.size)
 
@@ -30,9 +30,20 @@ class ImageHandler():
 
         availableArea = (self.textBoxes[textBoxNo][2]-self.textBoxes[textBoxNo][0])*(self.textBoxes[textBoxNo][3]-self.textBoxes[textBoxNo][1])
         currentArea = textsize[0]*textsize[1]
-        newFontSize = int(self.size*(math.floor(availableArea)/math.ceil(currentArea)))
+        scaler = math.floor(availableArea)/math.ceil(currentArea)
 
+        print(scaler)
+
+
+
+        newFontSize = int(self.size * math.sqrt(scaler * 0.7))
+        
+        print("from "+str(self.size)+"to"+str(newFontSize))
+        
         self.size = newFontSize
+        print(self.size)
+        self.myFont = ImageFont.truetype("fonts/"+self.fontType, int(self.size))
+        print(self.myFont.getsize)
 
         distanceRight = self.textBoxes[textBoxNo][0]+textsize[0]
 
@@ -79,29 +90,5 @@ class ImageHandler():
     def fontPicker(self):
         #fontType = "fonts/ArianaVioleta.ttf"
         self.fontType = random.choice(os.listdir("fonts/"))
-
-"""
-    def autoFontSize(self, text, textBoxNo): #will have the string, and textbox type passed into it
-        #start at font size a
-        
-        #iterate
-            #set template to image
-            #try writing the string with current font size
-            #if end y < y2, increment font size and repeat iterate
-
-            #once y>y2, break from loop and de increment font size by 1 unit
-            #write with this font size onto image
-        
-        self.size = 5
-        fitFlag = False
-
-        while not fitFlag:
-            templateImage = self.image.copy()
-            #write string to template
-            templateImage.d
-
-"""
-
-
 
 
