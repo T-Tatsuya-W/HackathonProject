@@ -76,7 +76,6 @@ class ImageHandler():
                     self.y=self.y+self.size
 
     def saveImage(self):
-        self.image.show()
         self.image.save("car2.png")
 
 
