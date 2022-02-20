@@ -77,7 +77,7 @@ class ImageHandler():
 
     def saveImage(self):
         self.image.show()
-        self.image.save(".gitignore/car2.png")
+        self.image.save("car2.png")
 
 
 
@@ -97,7 +97,7 @@ class ImageHandler():
             self.writeWordsWithNewLines("Arial")
 
         #returns bottom y value for next draw functions to use as the top value
-        return self.drawWords.y
+        return self.y
 
 
     
