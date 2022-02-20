@@ -13,6 +13,7 @@ import random as rnd
 #image processor for image handling
 from PIL import Image,ImageDraw,ImageFont
 import imageProcessor as IP
+img =Image.new('RGB', (1,1))
 
 img = IP.getImage("sources/car.png")
 
