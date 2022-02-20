@@ -35,5 +35,5 @@ year = row["Year"]
 
 
 # print(f"{name} who competed in {sport}")
-afterQuote = f"{age} years old {medal} medalist in {sport} from {team} "
+afterQuote = f"{name} \n{age} years old {medal} medalist in {sport} from {team} "
 print(afterQuote)
