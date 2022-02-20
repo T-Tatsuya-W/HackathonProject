@@ -1,64 +1,112 @@
 from PIL import Image,ImageDraw,ImageFont
- 
+from bot import img
+
+"""
 src1 = "sources/car.png"
 img = Image.open(src1)
 src2 = "sources/text.txt"
 text = open(src2, "r")
-Lines = text.readlines()    #each line is read into an array as a new objec
+Lines = text.readlines()   
+"""
+#----------------------------------------------------------------------------------------------
 
-print(img.width, img.height)
-
-def drawWords(text, x, y, R, G, B, size):   #doubled text writer to work with both windows and mac
-    try:
-        # Call draw Method to add 2D graphics in an image
-        I1 = ImageDraw.Draw(img)
-        # Custom font style and font size
-        #myFont = ImageFont.load_default()
-        fontType = "arial"              #"arial" for Windows, "Arial" for Mac
-        myFont = ImageFont.truetype(fontType, size)
-
-        size = myFont.getsize(text)
-
-        distanceRight = x+size[0]
-
-        if (distanceRight > img.width):
-            newText = text.split()
-            printString = ""
-            print(newText)
-            sum = x
-            for a in newText:
-                printString += a
-                wordsize = myFont.getsize(printString)
+def getImage(src):
+    return Image.open(src)
 
 
+def writeWordsWithNewLines(font):
+    #Code for drawing a string, taking the variables passed into (def drawWords)
+    #ensures that the text is contained within the constraints of the image width
+
+    print("successfully called writeWordsWithNewLines")
+    fontType = font
+    
+    I1 = ImageDraw.Draw(img)
+
+    
+    myFont = ImageFont.truetype(fontType, drawWords.size)
+
+    textsize = myFont.getsize(drawWords.text)
+    distanceRight = drawWords.x+textsize[0]
+
+    
+    print(drawWords.size)
+
+    newText = drawWords.text.split()
+    printString = ""
+    #print(newText)
+    sum = drawWords.x
 
 
-
-        print(size)
-
-
-        textPosition = (x, y) # (x, y) from top left
-        fontColour = (R,G,B) #rgb colour values
-        I1.text(textPosition, text, font=myFont, fill =fontColour)
-    except OSError:
-        # Call draw Method to add 2D graphics in an image
-        I1 = ImageDraw.Draw(img)
-        # Custom font style and font size
-        #myFont = ImageFont.load_default()
-        fontType = "Arial"              #"arial" for Windows, "Arial" for Mac
-        myFont = ImageFont.truetype(fontType, size)
-        textPosition = (x, y) # (x, y) from top left
-        fontColour = (R,G,B) #rgb colour values
-        I1.text(textPosition, text, font=myFont, fill =fontColour)
+    for a in range(len(newText)):
+        printString += newText[a]
+        printString += " "
+        wordsize = myFont.getsize(printString)[0] + drawWords.x
+        #print(wordsize)
+        #sum = sum + myFont.getsize(a)[0]
 
         
+        if a!=len(newText)-1:
+            if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                textPosition = (drawWords.x, drawWords.y) # (x, y) from top left
+                fontColour = (drawWords.R,drawWords.G,drawWords.B) #rgb colour values
+                I1.text(textPosition, printString, font=myFont, fill =fontColour)
 
-#draw 3 simple magentas lines from the text
-drawWords(Lines[0], 20, 40, 255, 0, 255, 65)
-drawWords(Lines[1], 20, 100, 255, 0, 255, 65)
-drawWords(Lines[2], 20, 160, 255, 0, 255, 65)
+                drawWords.y=drawWords.y+drawWords.size
+                printString = ""
+
+        else: 
+            #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                textPosition = (drawWords.x, drawWords.y) # (x, y) from top left
+                fontColour = (drawWords.R,drawWords.G,drawWords.B) #rgb colour values
+                I1.text(textPosition, printString, font=myFont, fill =fontColour)
+
+                drawWords.y=drawWords.y+drawWords.size
 
 
+
+def drawWords(text, x, y, R, G, B, size): 
+    print("successfully called drawWords with text:"+text)
+    #setting all variables so that they can be called from other functions
+    drawWords.text = text
+    drawWords.x = x
+    drawWords.y = y
+    drawWords.R = R
+    drawWords.G = G
+    drawWords.B = B
+    drawWords.size = size
+
+
+    #first tries "arial" for Windows, if not, "Arial" for mac
+    try:
+        writeWordsWithNewLines("arial")
+
+    except OSError:
+        writeWordsWithNewLines("Arial")
+
+    #returns bottom y value for next draw functions to use as the top value
+    return drawWords.y
+
+
+
+def saveImage():
+    img.show()
+    img.save(".gitignore/car2.png")
+    
+"""
+
+#draws basic lines to test the auto newline, even this should be automated
+nexty = drawWords(Lines[0], 20, 40, 255, 0, 255, 65)
+nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 55)
+nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 54)
+nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 53)
+nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 52)
+nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 51)
+
+
+#automatically shows the current state of img
 img.show()  #temporarily shows the created image
 
-img.save("car2.png")    # Save the image
+
+#saves img to the directory indicated
+img.save(".gitignore/car2.png")    # Save the image"""
