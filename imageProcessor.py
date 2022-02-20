@@ -17,6 +17,7 @@ class ImageHandler():
         self.G = G
         self.B = B
         self.size = size
+        self.text = text
 
         self.image = Image.open(src)
 
