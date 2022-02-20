@@ -116,7 +116,7 @@ async def on_reaction_add(reaction, user):
 
             image1.drawWords(reaction.message.content, 0)
 
-            image1.drawWords(reaction.message.author.name, 1)
+            image1.drawWords(CS.generator(), 2)
 
             image1.saveImage()
 
