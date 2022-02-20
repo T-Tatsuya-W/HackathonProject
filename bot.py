@@ -1,11 +1,5 @@
 # bot.py
 #region Imports
-<<<<<<< HEAD
-=======
-#from asyncio.windows_events import NULL
-
-from email.mime import image
->>>>>>> 9610cab7e20e5bd099e3f59c5fab5a52bde95dc4
 import os
 import discord
 from dotenv import load_dotenv
