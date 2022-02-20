@@ -13,7 +13,7 @@ def writeWordsWithNewLines(font):
     #Code for drawing a string, taking the variables passed into (def drawWords)
     #ensures that the text is contained within the constraints of the image width
 
-
+    print("successfully called writeWordsWithNewLines")
     fontType = font
     
     I1 = ImageDraw.Draw(img)
@@ -61,7 +61,7 @@ def writeWordsWithNewLines(font):
 
 
 def drawWords(text, x, y, R, G, B, size): 
-
+    print("successfully called drawWords with text:"+text)
     #setting all variables so that they can be called from other functions
     drawWords.text = text
     drawWords.x = x
