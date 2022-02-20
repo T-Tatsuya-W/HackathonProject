@@ -10,7 +10,7 @@ import random as rnd
 from PIL import Image,ImageDraw,ImageFont
 import imageProcessor as IP
 # sys.path.append('./Constructor')
-import constructor_preqoute as CS
+import constructror_preqoute as CS
 CS.generator()
 #endregion
 
