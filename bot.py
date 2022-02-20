@@ -142,7 +142,7 @@ async def on_reaction_add(reaction, user):
 
             await reaction.message.channel.send(file=discord.File('output.png'))
             #--------------------------- Message after the image should be changed to something beter
-            await reaction.message.channel.send("Here is a comment to accompany the quote")
+            #await reaction.message.channel.send("Here is a comment to accompany the quote")
 
 #region OnReadyEvent
 @client.event
