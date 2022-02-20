@@ -1,0 +1,9 @@
+for uploading to git for teamates:
+"I should do this"
+.gitignore has line: .venv/
+pip freeze > requirements.txt
+
+"They should do this"
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
