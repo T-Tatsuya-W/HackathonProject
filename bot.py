@@ -37,7 +37,7 @@ async def on_message(message):
             if msg.author != client.user:
                 if type(msg.content) == list:
                     break
-                elif len(msg.content) < 1 or len(msg.content) > 100 or msg.content.startswith('$') == True:
+                elif len(msg.content) < 1 or len(msg.content) > 100 or msg.content.startswith('$') == True or msg.content.startswith('http'):
                     continue
                 else:
                     messagecontent.append(msg.content)
