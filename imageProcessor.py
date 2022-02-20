@@ -1,24 +1,28 @@
 from PIL import Image,ImageDraw,ImageFont
+import os, random
 
 class ImageHandler():
-    def __init__(self, text, x, y, R, G, B, size, src) -> None:
+    def __init__(self, x, y, R, G, B, size, src) -> None:
         self.x = x
         self.y = y
         self.R = R
         self.G = G
         self.B = B
         self.size = size
-        self.text = text
+        self.text = ""
         self.image = Image.open(src)
 
     def getImage(self, src):
         self.image = Image.open(src)
 
-    def writeWordsWithNewLines(self, font):
+    def drawWords(self, text):
+        self.text = text
         #ensures that the text is contained within the constraints of the image width
 
         print("successfully called writeWordsWithNewLines")
-        fontType = font
+
+        #fontType = "fonts/ArianaVioleta.ttf"
+        fontType = random.choice(os.listdir("fonts/"))
         
         I1 = ImageDraw.Draw(self.image)
 
@@ -60,14 +64,3 @@ class ImageHandler():
         self.image = Image.new('RGB', (1,1))
         self.image = self.getImage("sources/car.png")
 
-
-    def drawWords(self): 
-        #first tries "arial" for Windows, if not, "Arial" for mac
-        try:
-            self.writeWordsWithNewLines("fonts/ArianaVioleta.ttf")
-
-        except OSError:
-            self.writeWordsWithNewLines("Arial")
-
-        #returns bottom y value for next draw functions to use as the top value
-        return self.y

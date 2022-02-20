@@ -49,9 +49,9 @@ async def on_message(message):
 
         #---------------------added image code
 
-        image1 = IP.ImageHandler(messagecontent[x], 10,10,0,0,0,50,"https://source.unsplash.com/random/300x200")
+        image1 = IP.ImageHandler(10,10,0,0,0,50,"sources/car.png")
 
-        image1.drawWords()
+        image1.drawWords(messagecontent[x])
 
         image1.saveImage()
 
