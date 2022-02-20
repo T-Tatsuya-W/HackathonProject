@@ -5,7 +5,6 @@ import discord
 from dotenv import load_dotenv
 import random as rnd
 
-
 #image processor for image handling
 from PIL import Image,ImageDraw,ImageFont
 import imageProcessor as IP
@@ -37,32 +36,46 @@ async def on_message(message):
             if msg.author != client.user:
                 if type(msg.content) == list:
                     break
-                elif len(msg.content) < 1 or len(msg.content) > 100 or msg.content.startswith('$') == True or "http" in msg.content:
+                elif len(msg.content) < 1 or len(msg.content) > 100 or msg.content.startswith('$') == True or msg.content.startswith('http'):
                     continue
                 else:
                     messagecontent.append(msg.content)
                     messageauthor.append(msg.author.name)
 
         x = rnd.randrange(len(messagecontent)-1)
-        value = (messagecontent[x] + "\n" + messageauthor[x])
-        print (value)
+        #value = (messagecontent[x] + "\n" + messageauthor[x])
+        #print (value)
+
+        quote1 = messagecontent[x]
+        print("Generating quote from "+messageauthor[x])
+
+        print(messagecontent[x])
+
+
+        quote2 = "Author name"
+        quote3 = "Author description goes here"
 
         #---------------------added image code
+        #------------------------R,G,B,fontSize,img source
+        image1 = IP.ImageHandler(0,0,0,50,"sources/car.png")
 
-        image1 = IP.ImageHandler(10,10,0,0,0,50,"sources/car.png")
+        image1.setTextBoxDimensions()
 
-        image1.drawWords(messagecontent[x])
+        image1.fontPicker()
+
+        image1.drawWords(quote1, 0)
+
+        image1.drawWords(quote2, 1)
+
+        image1.drawWords(quote3, 2)
 
         image1.saveImage()
 
-        await message.channel.send(file=discord.File('car2.png'))
-
-        #---------------------------
-        await message.channel.send(value)
-
+        await message.channel.send(file=discord.File('output.png'))
+        #--------------------------- Message after the image should be changed to something beter
+        await message.channel.send("Here is a comment to accompany the quote")
 
 
-                       
 
 #region OnReadyEvent
 @client.event
