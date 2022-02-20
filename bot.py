@@ -9,9 +9,6 @@ import random as rnd
 #image processor for image handling
 from PIL import Image,ImageDraw,ImageFont
 import imageProcessor as IP
-img =Image.new('RGB', (1,1))
-
-img = IP.getImage("sources/car.png")
 
 #endregion
 
@@ -52,10 +49,12 @@ async def on_message(message):
 
         #---------------------added image code
 
-        nexty = IP.drawWords(messagecontent[x], 20, 40, 255, 0, 255, 65)
+        image1 = IP.ImageHandler(messagecontent[x], 10,10,0,0,0,50,".gitignore/car.png")
 
+        image1.drawWords()
 
-        IP.save()
+        image1.saveImage()
+
 
 
         #---------------------------

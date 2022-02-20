@@ -1,6 +1,4 @@
 from PIL import Image,ImageDraw,ImageFont
-from bot import img
-
 """
 src1 = "sources/car.png"
 img = Image.open(src1)
@@ -10,103 +8,118 @@ Lines = text.readlines()
 """
 #----------------------------------------------------------------------------------------------
 
-def getImage(src):
-    return Image.open(src)
+
+class ImageHandler():
+    def __init__(self, text, x, y, R, G, B, size, src) -> None:
+        self.x = x
+        self.y = y
+        self.R = R
+        self.G = G
+        self.B = B
+        self.size = size
+
+        self.image = self.getImage(src)
+
+    def getImage(self, src):
+        return Image.open(src)
 
 
-def writeWordsWithNewLines(font):
-    #Code for drawing a string, taking the variables passed into (def drawWords)
-    #ensures that the text is contained within the constraints of the image width
+    def writeWordsWithNewLines(self, font):
+        #global img
+        #Code for drawing a string, taking the variables passed into (def drawWords)
+        #ensures that the text is contained within the constraints of the image width
 
-    print("successfully called writeWordsWithNewLines")
-    fontType = font
-    
-    I1 = ImageDraw.Draw(img)
-
-    
-    myFont = ImageFont.truetype(fontType, drawWords.size)
-
-    textsize = myFont.getsize(drawWords.text)
-    distanceRight = drawWords.x+textsize[0]
-
-    
-    print(drawWords.size)
-
-    newText = drawWords.text.split()
-    printString = ""
-    #print(newText)
-    sum = drawWords.x
-
-
-    for a in range(len(newText)):
-        printString += newText[a]
-        printString += " "
-        wordsize = myFont.getsize(printString)[0] + drawWords.x
-        #print(wordsize)
-        #sum = sum + myFont.getsize(a)[0]
+        print("successfully called writeWordsWithNewLines")
+        fontType = font
+        
+        I1 = ImageDraw.Draw(self.image)
 
         
-        if a!=len(newText)-1:
-            if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
-                textPosition = (drawWords.x, drawWords.y) # (x, y) from top left
-                fontColour = (drawWords.R,drawWords.G,drawWords.B) #rgb colour values
-                I1.text(textPosition, printString, font=myFont, fill =fontColour)
+        myFont = ImageFont.truetype(fontType, self.size)
 
-                drawWords.y=drawWords.y+drawWords.size
-                printString = ""
+        textsize = myFont.getsize(self.text)
+        distanceRight = self.x+textsize[0]
 
-        else: 
-            #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
-                textPosition = (drawWords.x, drawWords.y) # (x, y) from top left
-                fontColour = (drawWords.R,drawWords.G,drawWords.B) #rgb colour values
-                I1.text(textPosition, printString, font=myFont, fill =fontColour)
+        
+        print(self.size)
 
-                drawWords.y=drawWords.y+drawWords.size
+        newText = self.text.split()
+        printString = ""
+        #print(newText)
+        sum = self.x
 
 
+        for a in range(len(newText)):
+            printString += newText[a]
+            printString += " "
+            wordsize = myFont.getsize(printString)[0] + self.x
+            #print(wordsize)
+            #sum = sum + myFont.getsize(a)[0]
 
-def drawWords(text, x, y, R, G, B, size): 
-    print("successfully called drawWords with text:"+text)
-    #setting all variables so that they can be called from other functions
-    drawWords.text = text
-    drawWords.x = x
-    drawWords.y = y
-    drawWords.R = R
-    drawWords.G = G
-    drawWords.B = B
-    drawWords.size = size
+            
+            if a!=len(newText)-1:
+                if wordsize + myFont.getsize(newText[a+1])[0] > self.image.width:
+                    textPosition = (self.x, self.y) # (x, y) from top left
+                    fontColour = (self.R,self.G,self.B) #rgb colour values
+                    I1.text(textPosition, printString, font=myFont, fill =fontColour)
+
+                    self.y=self.y+self.size
+                    printString = ""
+
+            else: 
+                #if wordsize + myFont.getsize(newText[a+1])[0] > img.width:
+                    textPosition = (self.x, self.y) # (x, y) from top left
+                    fontColour = (self.R,self.G,self.B) #rgb colour values
+                    I1.text(textPosition, printString, font=myFont, fill =fontColour)
+
+                    self.y=self.y+self.size
+
+    def saveImage(self):
+        self.image.show()
+        self.image.save(".gitignore/car2.png")
+
+    def main(self):
+        img = Image.new('RGB', (1,1))
+        img = self.getImage("sources/car.png")
+        self.drawWords('hi', 20, 10, 0, 0, 0, 50, img)
 
 
-    #first tries "arial" for Windows, if not, "Arial" for mac
-    try:
-        writeWordsWithNewLines("arial")
 
-    except OSError:
-        writeWordsWithNewLines("Arial")
+    def drawWords(self): 
+        #first tries "arial" for Windows, if not, "Arial" for mac
+        try:
+            self.writeWordsWithNewLines("arial", self.img)
 
-    #returns bottom y value for next draw functions to use as the top value
-    return drawWords.y
+        except OSError:
+            self.writeWordsWithNewLines("Arial", self.img)
+
+        #returns bottom y value for next draw functions to use as the top value
+        return self.drawWords.y
 
 
-
-def saveImage():
-    img.show()
-    img.save(".gitignore/car2.png")
     
-"""
-
-#draws basic lines to test the auto newline, even this should be automated
-nexty = drawWords(Lines[0], 20, 40, 255, 0, 255, 65)
-nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 55)
-nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 54)
-nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 53)
-nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 52)
-nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 51)
 
 
-#automatically shows the current state of img
-img.show()  #temporarily shows the created image
+# ##
+
+# def main():
+#     img = Image.new('RGB', (1,1))
+#     img = getImage("sources/car.png")
+#     drawWords('hi', 20, 10, 0, 0, 0, 50, img)
+    
+# """
+# #draws basic lines to test the auto newline, even this should be automated
+# nexty = drawWords(Lines[0], 20, 40, 255, 0, 255, 65)
+# nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 55)
+# nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 54)
+# nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 53)
+# nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 52)
+# nexty = drawWords(Lines[1], 20, nexty+30, 255, 0, 255, 51)
 
 
-#saves img to the directory indicated
-img.save(".gitignore/car2.png")    # Save the image"""
+# #automatically shows the current state of img
+# img.show()  #temporarily shows the created image
+
+
+# #saves img to the directory indicated
+# img.save(".gitignore/car2.png")    # Save the image"""
