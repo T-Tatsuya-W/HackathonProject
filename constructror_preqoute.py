@@ -15,6 +15,6 @@ def generator():
     year = row["Year"]
 
 
-
+    print(age)
     afterQuote = f"{name} \n{age} years old {medal} medalist in {sport} from {team} "
-    return afterQuote
+    # return afterQuote
