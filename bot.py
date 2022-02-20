@@ -1,6 +1,7 @@
 # bot.py
 #region Imports
 import os
+import sys
 import discord
 from dotenv import load_dotenv
 import random as rnd
@@ -8,7 +9,8 @@ import random as rnd
 #image processor for image handling
 from PIL import Image,ImageDraw,ImageFont
 import imageProcessor as IP
-from Constructor import constructor_preqoute as CS
+sys.path.append('./Constructor')
+import constructor_preqoute as CS
 CS.generator()
 #endregion
 
