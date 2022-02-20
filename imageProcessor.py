@@ -21,7 +21,7 @@ class ImageHandler():
         self.image = self.getImage(src)
 
     def getImage(self, src):
-        return Image.open(src)
+        self.image = Image.open(src)
 
 
     def writeWordsWithNewLines(self, font):
