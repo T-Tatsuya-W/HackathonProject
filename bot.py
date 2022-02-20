@@ -9,7 +9,7 @@ import random as rnd
 #image processor for image handling
 from PIL import Image,ImageDraw,ImageFont
 import imageProcessor as IP
-sys.path.append('./Constructor')
+# sys.path.append('./Constructor')
 import constructor_preqoute as CS
 CS.generator()
 #endregion
