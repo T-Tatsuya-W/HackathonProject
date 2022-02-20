@@ -6,6 +6,17 @@ import discord
 from dotenv import load_dotenv
 import pandas as pd
 import random as rnd
+
+
+#image processor for image handling
+from PIL import Image,ImageDraw,ImageFont
+import imageProcessor as IP
+
+src1 = "sources/car.png"
+img = Image.open(src1)
+
+
+
 #endregion
 
 load_dotenv()
@@ -43,7 +54,19 @@ async def on_message(message):
         x = rnd.randrange(len(messagecontent)-1)
         value = (messagecontent[x] + "\n" + messageauthor[x])
         print (value)
+
+        #---------------------added image code
+
+        nexty = IP.drawWords(messagecontent[x], 20, 40, 255, 0, 255, 65)
+        img.show()  #temporarily shows the created imag
+        img.save(".gitignore/car2.png")    # Save the image
+
+
+        #---------------------------
         await message.channel.send(value)
+
+
+
                        
 
 #region OnReadyEvent
