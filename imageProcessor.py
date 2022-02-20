@@ -78,9 +78,11 @@ class ImageHandler():
         self.image.show()
         self.image.save(".gitignore/car2.png")
 
+
+
     def main(self):
-        img = Image.new('RGB', (1,1))
-        img = self.getImage("sources/car.png")
+        self.image = Image.new('RGB', (1,1))
+        self.image = self.getImage("sources/car.png")
         self.drawWords('hi', 20, 10, 0, 0, 0, 50, img)
 
 
@@ -88,10 +90,10 @@ class ImageHandler():
     def drawWords(self): 
         #first tries "arial" for Windows, if not, "Arial" for mac
         try:
-            self.writeWordsWithNewLines("arial", self.img)
+            self.writeWordsWithNewLines("arial", self.image)
 
         except OSError:
-            self.writeWordsWithNewLines("Arial", self.img)
+            self.writeWordsWithNewLines("Arial", self.image)
 
         #returns bottom y value for next draw functions to use as the top value
         return self.drawWords.y
