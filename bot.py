@@ -1,10 +1,8 @@
 # bot.py
 #region Imports
-from asyncio.windows_events import NULL
 import os
 import discord
 from dotenv import load_dotenv
-import pandas as pd
 import random as rnd
 #endregion
 
