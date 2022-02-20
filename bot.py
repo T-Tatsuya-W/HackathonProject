@@ -49,7 +49,7 @@ async def on_message(message):
 
         #---------------------added image code
 
-        image1 = IP.ImageHandler(messagecontent[x], 10,10,0,0,0,50,".gitignore/car.png")
+        image1 = IP.ImageHandler(messagecontent[x], 10,10,0,0,0,50,"sources/car.png")
 
         image1.drawWords()
 
