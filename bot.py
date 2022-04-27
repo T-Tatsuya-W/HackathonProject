@@ -6,6 +6,9 @@ import discord
 from dotenv import load_dotenv
 import random as rnd
 import PIL
+from PIL import Image, ImageDraw, ImageColor
+from perlin_noise import PerlinNoise
+
 
 #image processor for image handling
 from PIL import Image,ImageDraw,ImageFont
@@ -65,11 +68,39 @@ async def on_message(message):
         import requests
         from io import BytesIO
 
-        url = "https://source.unsplash.com/random"
-        response = requests.get(url)
-        img = Image.open(BytesIO(response.content))
-        #img.show()
+
+        #HERE IS CONTENT TO CREATE IMAGE ---------------------------------------
+        if rnd.random()>0.5:
+            url = "https://source.unsplash.com/random"
+            response = requests.get(url)
+            img = Image.open(BytesIO(response.content))
+            #img.show()
+        else:
+            xpix, ypix = 1000,1000
+            img = Image.new("RGBA", (xpix, ypix), (20,20,20,255))
+            noisex = PerlinNoise(octaves = 8)
+            noisey = PerlinNoise(octaves = 8)
+            noises = PerlinNoise(octaves = 4)
+            noiseH = PerlinNoise(octaves = 4)
+            hOrigin = rnd.random()*360
+            for i in range(1000):
+                line = (int(xpix/2 + noisex(i/500)*xpix), int( ypix/2 + noisey(i/500)*ypix))
+                size =  15 + int(noises(i/1000)*30)
+                hue =  int( hOrigin + (noiseH(i/1000)*360))
+                if hue>= 360:
+                    hue = hue - 360
+                if hue < 0:
+                    hue = hue +360
+                rgb = ImageColor.getrgb("hsv("+str(hue)+",100%,100%)")
+                transp = Image.new("RGBA", img.size, (0,0,0,0))
+                draw = ImageDraw.Draw(transp, "RGBA")
+                pos = ((line[0]-size, line[1]-size),(line[0]+size, line[1]+size))
+                draw.ellipse(pos, fill = (rgb[0], rgb[1], rgb[2], 30))
+                img.paste(Image.alpha_composite(img, transp))
         img.save("tempImage.png")
+
+        #----------------------------------------------------------------------
+
 
 
         img = Image.open("tempImage.png")
@@ -120,11 +151,16 @@ async def on_reaction_add(reaction, user):
             import requests
             from io import BytesIO
 
+
+            #HERE IS CONTENT TO CREATE IMAGE ---------------------------------------
+
             url = "https://source.unsplash.com/random"
             response = requests.get(url)
             img = Image.open(BytesIO(response.content))
             #img.show()
             img.save("tempImage.png")
+
+            #----------------------------------------------------------------------
 
                 
             img = Image.open("tempImage.png")
